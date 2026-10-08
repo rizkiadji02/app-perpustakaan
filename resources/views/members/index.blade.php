@@ -1,9 +1,24 @@
-@extends('layouts.app')
-
-@section('title', 'Daftar Anggota')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Anggota</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #d1d5db; padding: 8px; text-align: left; }
+        th { background: #f3f4f6; }
+        .success { color: #166534; margin: 16px 0; }
+    </style>
+</head>
+<body>
     <h1>Daftar Anggota</h1>
+
+    <p><a href="{{ route('members.create') }}">+ Tambah Anggota</a></p>
+
+    @if (session('success'))
+        <p class="success">{{ session('success') }}</p>
+    @endif
 
     <table>
         <thead>
@@ -13,6 +28,7 @@
                 <th>NIM</th>
                 <th>Email</th>
                 <th>No. Telepon</th>
+                <th>Alamat</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -24,15 +40,15 @@
                     <td>{{ $member['nim'] }}</td>
                     <td>{{ $member['email'] }}</td>
                     <td>{{ $member['nomor_telepon'] }}</td>
+                    <td>{{ $member['alamat'] }}</td>
                     <td>{{ ucfirst($member['status']) }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">Belum ada data anggota.</td>
+                    <td colspan="7">Belum ada data anggota.</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
-
-    <p><em>Catatan: data di atas masih data dummy (array statis di Controller). Form tambah/edit anggota dan CRUD lengkap anggota baru dibuat mulai Pertemuan 5.</em></p>
-@endsection
+</body>
+</html>
